@@ -20,13 +20,13 @@ def gestionar_sesion(nombre_usuario):
 def ejecutar_hilo(nombre_usuario):
     gestionar_sesion(nombre_usuario)
 
-nombres_usuarios = ["Ana", "Carlos", "Beatriz", "David", "Elena"]
+if __name__ == "__main__":
+    hilos = []
+    nombres_usuarios = ["Ana", "Carlos", "Beatriz", "David", "Elena"]
+    for nombre_usuario in nombres_usuarios:
+        hilo = threading.Thread(target=ejecutar_hilo, args=(nombre_usuario,))
+        hilos.append(hilo)
+        hilo.start()
 
-hilos = []
-for nombre_usuario in nombres_usuarios:
-    hilo = threading.Thread(target=ejecutar_hilo, args=(nombre_usuario,))
-    hilos.append(hilo)
-    hilo.start()
-
-for hilo in hilos:
-    hilo.join()
+    for hilo in hilos:
+        hilo.join()
